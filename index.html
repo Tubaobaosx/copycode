@@ -4,41 +4,47 @@
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
-<body>
-<pre>aaaa</pre>
-<code>11111111</code>
-<ul>
-    <li>22222</li>
-    <code>222222222222</code>
-</ul>
-<code>33333333333333333333</code>
-<!--console.log($(this).prev().text());-->
-
-</body>
 <script src="jquery-1.10.2.min.js"></script>
 <script src="clipboard.min.js"></script>
 <script>
     $(document).ready(function(){
-        $(document).find("code").after(" <b class='copy'>复制</b>");
+        $(document).find("code").after(" <b class='copy' data-clipboard-action='copy'>复制代码</b>");
         var code = document.querySelectorAll('code');
         var newcopy = document.querySelectorAll('.copy');
         for(var i=0;i<code.length;i++){
-            $("code").attr('id','code'+i);
+            code[i].setAttribute('id','code'+i);
         }
         for(var k = 0; k < newcopy.length; k++){
-            $(".copy").attr('id','copy'+k);
+            newcopy[k].setAttribute('id','copy'+k);
+            newcopy[k].setAttribute('data-clipboard-target','#code'+k);
         }
-//        $(document).find("code").after(" <b class='copy copy1' data-clipboard-action='copy' data-clipboard-target='#a3'>复制</b>");
         var clipboard = new ClipboardJS('.copy');
         clipboard.on('success', function(e) {
-            console.info('Action:', e.action);
-            console.info('Text:', e.text);
-            console.info('Trigger:', e.trigger);
+//            console.info('Action:', e.action);
+//            console.info('Text:', e.text);
+//            console.info('Trigger:', e.trigger);
+            alert("复制成功");
             e.clearSelection();
         });
         clipboard.on('error', function(e) {
-            console.error('Action:', e.action);
-            console.error('Trigger:', e.trigger);
+//            console.error('Action:', e.action);
+//            console.error('Trigger:', e.trigger);
+            alert("复制失败");
         });
     });
 </script>
+<style>
+    .copy{
+        font-size: 12px;
+        line-height: 1;
+        cursor: pointer;
+        color: hsla(0,0%,55%,.8);
+        transition: color .1s;
+    }
+</style>
+<body>
+<iframe  style="display: block" src="https://ascend.github.io/ascenddk-private/doc/atlasdk_userguide/%E6%A6%82%E8%BF%B0.html" width="100%" height= "1024px" name="topFrame" scrolling="No"  noresize="noresize" frameborder="0" id="topFrame"></iframe>
+
+</body>
+
+
