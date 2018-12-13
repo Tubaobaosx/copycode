@@ -25,7 +25,16 @@
 <script src="clipboard.min.js"></script>
 <script>
     $(document).ready(function(){
-        $(document).find("code").after(" <b class='copy' data-clipboard-action='copy' data-clipboard-target='code'>复制</b>");
+        $(document).find("code").after(" <b>复制</b>");
+        var code = document.querySelectorAll('code');
+        var newcopy = document.querySelectorAll('b');
+        for(var i=0;i<code.length;i++){
+            $("code").attr('id','code+"+i+"');
+        }
+        for(var k = 0; k < newcopy.length; k++){
+            $("b").attr('id','kx+"+k+"');
+        }
+//        $(document).find("code").after(" <b class='copy copy1' data-clipboard-action='copy' data-clipboard-target='#a3'>复制</b>");
         var clipboard = new ClipboardJS('.copy');
         clipboard.on('success', function(e) {
             console.info('Action:', e.action);
@@ -39,3 +48,4 @@
         });
     });
 </script>
+
